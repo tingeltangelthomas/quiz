@@ -141,7 +141,7 @@
         s.setAttribute('role','listitem');
         s.setAttribute('tabindex','0');
         s.setAttribute('aria-label',`Frage ${i+1} von ${total}`);
-        s.innerHTML = `<div class="content"><h1>${escapeHtml(q)}</h1><p aria-hidden="true">—</p><p style="margin-top:1rem;font-size:calc(var(--base-size) * 0.6)">${i+1}/${total}</p></div>`;
+        s.innerHTML = `<div class="content"><h1>${formatQuestion(q)}</h1><p aria-hidden="true">—</p><p style="margin-top:1rem;font-size:calc(var(--base-size) * 0.6)">${i+1}/${total}</p></div>`;
         deck.appendChild(s);
       });
       const end = document.createElement('section');
@@ -157,6 +157,7 @@
     }
 
     function escapeHtml(s){return (s+'').replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c]||c;});}
+    function formatQuestion(s){return escapeHtml(s).replace(/\\n/g,'<br>');}
 
     function updateProgress(){
       const all = Array.from(deck.querySelectorAll('section'));
